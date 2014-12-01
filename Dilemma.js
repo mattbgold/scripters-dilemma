@@ -1,3 +1,4 @@
+var Dilemma;
 (function(Dilemma) {
 	Dilemma.strategies=[{
         name: 'Always Defect',
