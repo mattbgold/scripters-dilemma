@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="./Dilemma.js"></script>
+    </head>
+    <body>
+    <div>
+        <ul></ul>
+    </div>
+    
+    <script type="text/javascript">
+    // choices
+// 0: cooperate
+// 1: defect
+var scores = [[1, -2],[2, -1]];
+
+//runs two algs against eachother 100 times, updating their score
+var runner = function(algoA, algoB) {
+    var historyA = [], historyB = [],
+        scoreA = 0, scoreB = 0;
+    for(var i=0; i<100;i++) {
+        var choiceA = algoA.alg(historyB, historyA)
+        var choiceB = algoB.alg(historyA, historyB)
+        historyA.push(choiceA);
+        historyB.push(choiceB);
+        scoreA+=scores[choiceA][choiceB];
+        scoreB+=scores[choiceB][choiceA];
+        //$('ul').append($('<div>').text("scoreA:"+scoreA.toString()+", scoreB:"+scoreB.toString()));
+        
+    }
+    algoA.score+=scoreA;
+    algoB.score+=scoreB;
+};
+
+//runs each alg against every alg, including themselves, and prints out the final score showing which alg is the winner
+var rank = function(algs) {
+    for(var i=0; i<algs.length;i++) {
+        for(var j=0; j < algs.length; j++) {
+            runner(algs[i], algs[j]);
+        }
+    }
+    $.each(algs, function(i, alg) {
+        $('ul').append($('<li>').text(alg.name + ': ' + alg.score.toString()));
+    });
+}
+
+
+
+$(function(){ rank(Dilemma.strategies); });
+        
+    </script>
+    </body>
+</html>
