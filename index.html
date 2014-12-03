@@ -23,8 +23,8 @@ var runner = function(algoA, algoB) {
     for(var i=0; i<100;i++) {
         var choiceA = algoA.alg(historyB, historyA)
         var choiceB = algoB.alg(historyA, historyB)
-        historyA.push(choiceA);
-        historyB.push(choiceB);
+        historyA.unshift(choiceA);
+        historyB.unshift(choiceB);
         scoreA+=scores[choiceA][choiceB];
         scoreB+=scores[choiceB][choiceA];
         //$('ul').append($('<div>').text("scoreA:"+scoreA.toString()+", scoreB:"+scoreB.toString()));
