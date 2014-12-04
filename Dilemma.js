@@ -52,6 +52,6 @@ var Dilemma;
         }
     }];
 
-    Dilemma.StrategyInstance = Actor;
+    Dilemma.Actor = Actor;
     Dilemma.Strategy = Strategy;
 })(Dilemma || (Dilemma = {}));
